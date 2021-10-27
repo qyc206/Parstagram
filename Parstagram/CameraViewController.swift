@@ -25,11 +25,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let post = PFObject(className: "Posts")
         
         // define schema of table
-        post["caption"] = commentField.text
+        post["caption"] = commentField.text!
         post["author"] = PFUser.current()!
         
-        let imageData = imageView.image!.pngData()  // save image as a png
-        let file = PFFileObject(name: "image.png", data: imageData!)   // binary image saved in a diff place in parse
+        let imageData = imageView.image?.pngData()  // save image as a png
+        let file = PFFileObject(data: imageData!)   // binary image saved in a diff place in parse
         post["image"] = file    // store url where the binary photo is stored
         
         post.saveInBackground { success, error in
